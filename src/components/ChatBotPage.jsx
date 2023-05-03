@@ -8,7 +8,6 @@ export default function ChatBotPage({ isClosed, id }) {
     { message: "Hi, I'm Usual.chat How can I help you ?", isUser: false },
   ]);
   const onRefrash = () => {
-    console.log(chatMessages);
     setChatMessages([
       { message: "Hi, I'm Usual.chat How can I help you ?", isUser: false },
     ]);
