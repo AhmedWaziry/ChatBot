@@ -1,5 +1,4 @@
 .extension{
-    
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -7,7 +6,7 @@
     row-gap: 15px;
     position: fixed;
     bottom: 0;
-   
+    
     right: 0;
     margin-right: 20px;
     margin-bottom: 20px;
@@ -36,6 +35,7 @@
     max-width: 500px;
     background-color: white;
     height: 80vh;
+   
 }
 
 @keyframes fade {
@@ -44,4 +44,23 @@
     100% {opacity: 0.8; box-shadow: 0 0 10px 0 #FD9053;}
    
   }
+
+  @media (max-width: 767px) {
+    .icon-button{
+        margin-right: 20px;
+    }
+    .extension{
+        margin-right: 0;
+     
+    }
+    .chat{
+        border:1px solid rgb(230, 229, 229);
+        border-radius: 20px;
+        min-width: 100%;
+        max-width:100%;
+        background-color: white;
+        height: 80vh;
+       
+  }
+}
   

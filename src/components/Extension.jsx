@@ -12,7 +12,6 @@ export default function Extension({ id }) {
       <div className={Style["chat"]} style={{ display: close ? "none" : "" }}>
         <ChatBotPage isClosed={isClosed} id={id} />
       </div>
-
       <div className={Style["icon-button"]} onClick={isClosed}>
         UC
       </div>
