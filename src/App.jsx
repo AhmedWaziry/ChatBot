@@ -4,19 +4,21 @@ import "./App.css";
 import Extension from "./components/Extension";
 
 function App() {
-  const [ID, setID] = useState("");
-
+  const [id, setId] = useState("");
+  console.log(id);
   useEffect(() => {
     const scriptTag = document.querySelector(
       'script[src="https://cdn.jsdelivr.net/gh/AhmedWaziry/ChatBot@main/dist/assets/chatbot4.js"]'
     );
+
     if (scriptTag) {
-      setID(scriptTag.getAttribute("id"));
+      console.log(scriptTag);
+      setId(scriptTag.getAttribute("id"));
     }
   }, []);
   return (
     <div className="App">
-      <Extension id={ID} />
+      <Extension id={id} />
     </div>
   );
 }

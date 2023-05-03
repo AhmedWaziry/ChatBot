@@ -9,13 +9,12 @@ export const baseURL = "https://api.usual.chat";
 export default function ChatBot({ chatMessages, setChatMessages, id }) {
   const bottomRef = useRef(null);
   const [loading, setLoading] = useState(false);
-  const [ID, setID] = useState(id);
   const [primary_color, setPrimaryColor] = useState("#fd905326");
   const [secondary_color, setSecondaryColor] = useState("#b3b3b31a");
   const [logo, setLogo] = useState(null);
 
   const handleGetAnswer = async (message) => {
-    const url = `${baseURL}/chatbot/chat/${ID}/`;
+    const url = `${baseURL}/chatbot/chat/${id}/`;
     fetch(url, {
       method: "POST",
       headers: {
@@ -52,7 +51,7 @@ export default function ChatBot({ chatMessages, setChatMessages, id }) {
   };
 
   useEffect(() => {
-    const url = `${baseURL}/chatbot/${ID}/`;
+    const url = `${baseURL}/chatbot/${id}/`;
     fetch(url, {
       method: "GET",
       headers: {
