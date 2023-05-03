@@ -6,10 +6,10 @@ import ChatBotInput from "./ChatBotInput";
 export const baseURL = "https://api.usual.chat";
 //export const baseURL = "http://localhost:8000";
 
-export default function ChatBot({ chatMessages, setChatMessages }) {
+export default function ChatBot({ chatMessages, setChatMessages, id }) {
   const bottomRef = useRef(null);
   const [loading, setLoading] = useState(false);
-  const [ID, setID] = useState("8ab0ea44-9542-47af-8d95-3897933debb4");
+  const [ID, setID] = useState(id);
   const [primary_color, setPrimaryColor] = useState("#fd905326");
   const [secondary_color, setSecondaryColor] = useState("#b3b3b31a");
   const [logo, setLogo] = useState(null);

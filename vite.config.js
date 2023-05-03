@@ -6,5 +6,13 @@ export default defineConfig({
   plugins: [react(), cssInjectedByJsPlugin()],
   build: {
     cssCodeSplit: false,
+    rollupOptions: {
+      output: {
+        format: "es",
+        strict: false,
+        entryFileNames: "assets/chatbot.js",
+        dir: "dist",
+      },
+    },
   },
 });

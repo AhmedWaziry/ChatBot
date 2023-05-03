@@ -3,7 +3,7 @@ import ChatBotNav from "./ChatBotNav";
 import ChatBot from "./ChatBot";
 import "./ChatBotPage.css";
 
-export default function ChatBotPage({ isClosed }) {
+export default function ChatBotPage({ isClosed, id }) {
   const [chatMessages, setChatMessages] = useState([
     { message: "Hi, I'm Usual.chat How can I help you ?", isUser: false },
   ]);
@@ -16,7 +16,11 @@ export default function ChatBotPage({ isClosed }) {
   return (
     <div className="chat-page">
       <ChatBotNav isClosed={isClosed} onRefrash={onRefrash} />
-      <ChatBot chatMessages={chatMessages} setChatMessages={setChatMessages} />
+      <ChatBot
+        chatMessages={chatMessages}
+        setChatMessages={setChatMessages}
+        id={id}
+      />
     </div>
   );
 }

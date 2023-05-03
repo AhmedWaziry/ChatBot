@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Style from "./Extension.module.css";
 import ChatBotPage from "./ChatBotPage";
 
-export default function Extension() {
+export default function Extension({ id }) {
   const [close, setClose] = useState(true);
   const isClosed = () => {
     setClose((prev) => !prev);
@@ -10,7 +10,7 @@ export default function Extension() {
   return (
     <div className={Style["extension"]}>
       <div className={Style["chat"]} style={{ display: close ? "none" : "" }}>
-        <ChatBotPage isClosed={isClosed} />
+        <ChatBotPage isClosed={isClosed} id={id} />
       </div>
 
       <div className={Style["icon-button"]} onClick={isClosed}>
