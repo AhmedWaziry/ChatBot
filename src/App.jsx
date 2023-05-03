@@ -8,7 +8,7 @@ function App() {
   console.log(id);
   useEffect(() => {
     const scriptTag = document.querySelector(
-      'script[src="https://cdn.jsdelivr.net/gh/AhmedWaziry/ChatBot@main/dist/assets/chatbot100.js"]'
+      'script[src="https://cdn.jsdelivr.net/gh/AhmedWaziry/ChatBot@main/dist/assets/chatbot1000.js"]'
     );
 
     if (scriptTag) {
@@ -16,11 +16,7 @@ function App() {
       setId(scriptTag.getAttribute("id"));
     }
   }, []);
-  return (
-    <div className="App">
-      <Extension id={id} />
-    </div>
-  );
+  return <div className="App">{id !== "" ? <Extension id={id} /> : <></>}</div>;
 }
 
 export default App;
