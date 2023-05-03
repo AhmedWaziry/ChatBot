@@ -30,7 +30,8 @@
 
 }
 .chat{
-    border:1px solid black;
+    border:1px solid rgb(230, 229, 229);
+    border-radius: 20px;
     min-width: 500px;
     max-width: 500px;
     background-color: white;

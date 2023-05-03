@@ -4,6 +4,8 @@ import bot from "../assets/bot.png";
 import sandclock from "../assets/sandclock.png";
 import ChatBotInput from "./ChatBotInput";
 export const baseURL = "https://api.usual.chat";
+import SmartToyIcon from "@mui/icons-material/SmartToy";
+import LoopIcon from "@mui/icons-material/Loop";
 //export const baseURL = "http://localhost:8000";
 
 export default function ChatBot({ chatMessages, setChatMessages, id }) {
@@ -93,14 +95,18 @@ export default function ChatBot({ chatMessages, setChatMessages, id }) {
               </div>
             ) : (
               <div className={Style["avatar-icon-bot"]}>
-                <img
-                  alt="logo"
-                  src={logo === null ? bot : baseURL + logo}
-                  style={{
-                    width: "20px",
-                    height: "20px",
-                  }}
-                />
+                {logo === null ? (
+                  <SmartToyIcon />
+                ) : (
+                  <img
+                    alt="logo"
+                    src={logo === null ? bot : baseURL + logo}
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                    }}
+                  />
+                )}
               </div>
             )}
             {chatMessage.isUser ? (
@@ -130,12 +136,8 @@ export default function ChatBot({ chatMessages, setChatMessages, id }) {
                 className={Style["bubble-message-bot"]}
               >
                 {loading && index == chatMessages.length - 1 && (
-                  <span className={Style["text-message"]}>
-                    <img
-                      alt="loader"
-                      src={sandclock}
-                      className={Style["loading-img"]}
-                    ></img>
+                  <span className={Style["loading-img"]}>
+                    <LoopIcon />
                   </span>
                 )}
                 <span

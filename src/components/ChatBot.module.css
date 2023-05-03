@@ -3,6 +3,7 @@
     flex-direction: column;
     /* padding: 50px; */
     /* margin-left: 200px; */
+    margin:0 30px 10px 30px;
     
   
     height: 100%;
@@ -12,7 +13,7 @@
 }
 .scrolling{
     overflow: auto;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     height: 90%;
 }
 .scrolling::-webkit-scrollbar {
@@ -100,8 +101,10 @@
     padding-right: 7px;
 }
 .loading-img{
-    width: 20px;
-    height: 20px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
     animation-name: rotate;
     animation-duration: 1s;
     animation-iteration-count: infinite;
@@ -111,7 +114,7 @@ from {
     transform: rotate(0deg);
 }
 to {
-    transform: rotate(180deg);
+    transform: rotate(360deg);
 }
 }
 @media screen and (max-width: 768px) {
