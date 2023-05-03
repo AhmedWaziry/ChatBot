@@ -7,7 +7,7 @@ function App() {
   const [ID, setID] = useState("");
   useEffect(() => {
     const scriptTag = document.querySelector(
-      'script[src="https://cdn.jsdelivr.net/gh/AhmedWaziry/ChatBot@main/dist/assets/chatbot.js"]'
+      'script[src="https://cdn.jsdelivr.net/gh/AhmedWaziry/ChatBot@main/dist/assets/chatbot2.js"]'
     );
     console.log(scriptTag);
     setID(scriptTag.getAttribute("id"));
