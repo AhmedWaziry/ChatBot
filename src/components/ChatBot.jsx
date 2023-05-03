@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Style from "./ChatBot.module.css";
-import bot from "../assets/bot.png";
-import sandclock from "../assets/sandclock.png";
+
 import ChatBotInput from "./ChatBotInput";
 export const baseURL = "https://api.usual.chat";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
@@ -100,7 +99,7 @@ export default function ChatBot({ chatMessages, setChatMessages, id }) {
                 ) : (
                   <img
                     alt="logo"
-                    src={logo === null ? bot : baseURL + logo}
+                    src={logo === null ? "" : baseURL + logo}
                     style={{
                       width: "20px",
                       height: "20px",
