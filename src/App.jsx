@@ -1,19 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import "./App.css";
 import Extension from "./components/Extension";
 
 function App() {
-  let id = "";
+  const [ID, setID] = useState("");
   useEffect(() => {
     const scriptTag = document.querySelector(
       'script[src="https://cdn.jsdelivr.net/gh/AhmedWaziry/ChatBot@main/dist/assets/chatbot.js"]'
     );
-    id = scriptTag.getAttribute("id");
+    setID(scriptTag.getAttribute("id"));
   }, []);
   return (
     <div className="App">
-      <Extension id={id} />
+      <Extension id={ID} />
     </div>
   );
 }
