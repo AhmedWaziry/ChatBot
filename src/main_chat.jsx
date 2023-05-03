@@ -1,8 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import AppChat from "./AppChat";
 import "./indexChat.css";
 
-ReactDOM.createRoot(document.getElementById("root-chatbot")).render(
-  <AppChat />
-);
+ReactDOM.render(<AppChat />, document.getElementById("root-chatbot"));
