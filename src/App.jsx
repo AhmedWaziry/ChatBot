@@ -5,13 +5,14 @@ import Extension from "./components/Extension";
 
 function App() {
   const [ID, setID] = useState("");
-  console.log(ID);
+
   useEffect(() => {
     const scriptTag = document.querySelector(
-      'script[src="https://cdn.jsdelivr.net/gh/AhmedWaziry/ChatBot@main/dist/assets/chatbot3.js"]'
+      'script[src="https://cdn.jsdelivr.net/gh/AhmedWaziry/ChatBot@main/dist/assets/chatbot4.js"]'
     );
-
-    setID(scriptTag.getAttribute("id"));
+    if (scriptTag) {
+      setID(scriptTag.getAttribute("id"));
+    }
   }, []);
   return (
     <div className="App">
