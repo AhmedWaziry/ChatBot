@@ -9,6 +9,7 @@ function App() {
     const scriptTag = document.querySelector(
       'script[src="https://cdn.jsdelivr.net/gh/AhmedWaziry/ChatBot@main/dist/assets/chatbot.js"]'
     );
+    console.log(scriptTag);
     setID(scriptTag.getAttribute("id"));
   }, []);
   return (
