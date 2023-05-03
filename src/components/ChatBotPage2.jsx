@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import ChatBotNav from "./ChatBotNav";
-import ChatBot from "./ChatBot";
-import "./ChatBotPage.css";
+import ChatBotNav2 from "./ChatBotNav2";
+import ChatBot2 from "./ChatBot2";
+import "./ChatBotPage2.css";
 
-export default function ChatBotPage({ isClosed, id }) {
+export default function ChatBotPage2({ isClosed, id }) {
   const [chatMessages, setChatMessages] = useState([
     { message: "Hi, I'm Usual.chat How can I help you ?", isUser: false },
   ]);
@@ -14,8 +14,8 @@ export default function ChatBotPage({ isClosed, id }) {
   };
   return (
     <div className="chat-page">
-      <ChatBotNav isClosed={isClosed} onRefrash={onRefrash} />
-      <ChatBot
+      <ChatBotNav2 isClosed={isClosed} onRefrash={onRefrash} />
+      <ChatBot2
         chatMessages={chatMessages}
         setChatMessages={setChatMessages}
         id={id}

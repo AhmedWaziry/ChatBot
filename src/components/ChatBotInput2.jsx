@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Style from "./ChatBotInput.module.css";
+import Style from "./ChatBotInput2.module.css";
 import Vector1 from "../assets/Vector1.png";
 
-function ChatBotInput(props) {
+function ChatBotInput2(props) {
   const [message, setMessage] = useState("");
   const handleInputChange = (e) => {
     setMessage(e.target.value);
@@ -43,4 +43,4 @@ function ChatBotInput(props) {
   );
 }
 
-export default ChatBotInput;
+export default ChatBotInput2;

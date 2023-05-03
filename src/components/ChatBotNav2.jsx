@@ -1,9 +1,9 @@
 import React from "react";
-import Style from "./ChatBotNav.module.css";
+import Style from "./ChatBotNav2.module.css";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import CloseIcon from "@mui/icons-material/Close";
 
-function ChatBotNav({ isClosed, onRefrash }) {
+function ChatBotNav2({ isClosed, onRefrash }) {
   return (
     <div className={Style["nav"]}>
       <div className={Style["usaul-chat-txt"]}>
@@ -38,4 +38,4 @@ function ChatBotNav({ isClosed, onRefrash }) {
   );
 }
 
-export default ChatBotNav;
+export default ChatBotNav2;
