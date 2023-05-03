@@ -1,0 +1,121 @@
+.chat{
+    display: flex;
+    flex-direction: column;
+    /* padding: 50px; */
+    /* margin-left: 200px; */
+    
+  
+    height: 100%;
+    /* max-width: 1000px;    */
+  
+    overflow: hidden;
+}
+.scrolling{
+    overflow: auto;
+    margin-bottom: 50px;
+    height: 90%;
+}
+.scrolling::-webkit-scrollbar {
+    display: none;
+  }
+.chat-messages{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 10px;
+    transition: all 0.5s;
+    margin-top: 20px;
+}
+.bubble-message-user{
+    margin-top: 5px;
+    padding: 10px;
+    /*background: rgba(253, 144, 83, 0.15);*/
+    border-radius: 0px 20px 20px 20px;
+    transition: all 0.5s;
+
+}
+.bubble-message-bot{
+    margin-top: 5px;
+    padding: 10px;
+    /*background: rgba(179, 179, 179, 0.1);*/
+    border-radius: 0px 20px 20px 20px;
+    transition: all 0.5s;
+}
+.avatar-icon-user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 30px;
+    height: 30px;
+    margin-right: 20px;
+    background: rgba(253, 144, 83, 0.15);
+    border-radius: 5px;
+}
+.avatar-icon-bot{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 30px;
+    height: 30px;
+    margin-right: 20px;
+    background: rgba(179, 179, 179, 0.1);
+    border-radius: 5px;
+
+}
+.username-color {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FD9053;
+}
+.bot-color {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #c3c3c3;
+}
+
+.text-message{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    text-align: start;
+
+    color: #212121;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.loading-img{
+    width: 20px;
+    height: 20px;
+    animation-name: rotate;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}  
+@keyframes rotate {
+from {
+    transform: rotate(0deg);
+}
+to {
+    transform: rotate(180deg);
+}
+}
+@media screen and (max-width: 768px) {
+    .chat{
+        padding: 0 20px;
+    }
+}

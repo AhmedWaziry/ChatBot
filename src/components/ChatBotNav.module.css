@@ -1,0 +1,25 @@
+.nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 73px;
+    background: rgba(218, 218, 218, 0.1);
+}
+.usaul-chat-txt{
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 16px;
+    /* identical to box height, or 46% */
+    
+    display: flex;
+    align-items: center;
+    padding: 24px 16px;
+    margin-left: 36px;
+    color: #212121;
+    
+}
+.icons{
+  margin-right: 20px;
+}
