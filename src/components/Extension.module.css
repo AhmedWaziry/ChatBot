@@ -21,10 +21,10 @@
     font-size: x-large;
     width:58px;
     height: 58px;
-    background: linear-gradient(to bottom, #FD9053, #e9e9e9);
+    background: linear-gradient(to bottom, #FD9053, #FD9053);
     border-radius: 100%;
     cursor: pointer;
-    animation: fade 2s ease-in-out infinite;
+    animation: fade 1.5s ease-in-out infinite;
     font-style: italic;
 
 }
@@ -39,9 +39,9 @@
 }
 
 @keyframes fade {
-    0% {opacity: 0.8; box-shadow: 0 0 10px 0 #FD9053;}
+    0% {opacity: 0.8; box-shadow: 0 0 10px 0 #ff5e02;}
     50% {opacity: 1; box-shadow: none;}
-    100% {opacity: 0.8; box-shadow: 0 0 10px 0 #FD9053;}
+    100% {opacity: 0.8; box-shadow: 0 0 10px 0 #ff5e00;}
    
   }
 
