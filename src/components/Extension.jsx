@@ -23,8 +23,8 @@ export default function Extension({ id }) {
     })
       .then((res) => res.json())
       .then((res) => {
-        setColor(res.extension_color);
-        setLogo(res.extension_logo);
+        if (res.extension_color) setColor(res.extension_color);
+        if (res.extension_logo) setLogo(res.extension_logo);
       });
   }, []);
   return (
