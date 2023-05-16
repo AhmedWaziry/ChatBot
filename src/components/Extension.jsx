@@ -11,7 +11,7 @@ export default function Extension({ id }) {
     setClose((prev) => !prev);
   };
   const [logo, setLogo] = useState(null);
-  const [color, setColor] = useState("#fd905326");
+  const [color, setColor] = useState("#FD9053");
 
   useEffect(() => {
     const url = `${baseURL}/chatbot/${id}/`;
