@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import AppChat from "./AppChat";
-const element = document.createElement("dev");
+const element = document.createElement("div");
 element.setAttribute("id", "usualchat-extension");
 document.body.appendChild(element);
 

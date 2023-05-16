@@ -10,7 +10,7 @@ export default defineConfig({
       output: {
         format: "es",
         strict: false,
-        entryFileNames: "assets/chat_extension_1.js",
+        entryFileNames: "assets/chat_extension_10.js",
         dir: "dist",
       },
     },

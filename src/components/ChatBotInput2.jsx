@@ -27,7 +27,7 @@ function ChatBotInput2(props) {
         value={message}
         onChange={handleInputChange}
         onKeyDown={handleClickKey}
-        placeholder="Example : What's Usual.Chat ?"
+        placeholder="Ask me a question"
         autoFocus
       />
       <div

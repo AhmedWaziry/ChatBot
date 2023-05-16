@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import Style from "./ChatBot2.module.css";
 
 import ChatBotInput2 from "./ChatBotInput2";
-export const baseURL = "https://api.usual.chat";
+//export const baseURL = "https://api.usual.chat";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 import LoopIcon from "@mui/icons-material/Loop";
-//export const baseURL = "http://localhost:8000";
+export const baseURL = "http://localhost:8000";
 
 export default function ChatBot2({ chatMessages, setChatMessages, id }) {
   const bottomRef = useRef(null);
@@ -89,9 +89,7 @@ export default function ChatBot2({ chatMessages, setChatMessages, id }) {
         {chatMessages.map((chatMessage, index) => (
           <div className={Style["chat-messages"]} key={index}>
             {chatMessage.isUser ? (
-              <div className={Style["avatar-icon-user"]}>
-                <span className={Style["username-color"]}>Y</span>
-              </div>
+              <div className={Style["avatar-icon-user"]}></div>
             ) : (
               <div className={Style["avatar-icon-bot"]}>
                 {logo === null ? (
@@ -110,20 +108,12 @@ export default function ChatBot2({ chatMessages, setChatMessages, id }) {
             )}
             {chatMessage.isUser ? (
               <div
-                className={Style["bubble-message-user"]}
                 style={{
                   backgroundColor: primary_color,
                 }}
+                className={Style["bubble-message-user"]}
               >
-                <span
-                  className={Style["text-message"]}
-                  style={
-                    {
-                      // color: primary_color,
-                      // filter: "invert(100%)",
-                    }
-                  }
-                >
+                <span className={Style["text-message"]}>
                   {chatMessage.message}
                 </span>
               </div>
@@ -139,15 +129,7 @@ export default function ChatBot2({ chatMessages, setChatMessages, id }) {
                     <LoopIcon />
                   </span>
                 )}
-                <span
-                  className={Style["text-message"]}
-                  style={
-                    {
-                      // color: secondary_color,
-                      // filter: "invert(100%)",
-                    }
-                  }
-                >
+                <span className={Style["text-message"]}>
                   {chatMessage.message}
                 </span>
               </div>

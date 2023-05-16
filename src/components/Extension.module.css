@@ -21,10 +21,10 @@
     font-size: x-large;
     width:58px;
     height: 58px;
-    background: linear-gradient(to bottom, #FD9053, #FD9053);
+   
     border-radius: 100%;
     cursor: pointer;
-    animation: fade 1.5s ease-in-out infinite;
+
     font-style: italic;
 
 }
@@ -34,16 +34,11 @@
     min-width: 500px;
     max-width: 500px;
     background-color: white;
-    height: 80vh;
+   
    
 }
 
-@keyframes fade {
-    0% {opacity: 0.8; box-shadow: 0 0 10px 0 #ff5e02;}
-    50% {opacity: 1; box-shadow: none;}
-    100% {opacity: 0.8; box-shadow: 0 0 10px 0 #ff5e00;}
-   
-  }
+
 
   @media (max-width: 767px) {
     .icon-button{
@@ -59,7 +54,7 @@
         min-width: 100%;
         max-width:100%;
         background-color: white;
-        height: 80vh;
+      
        
   }
 }

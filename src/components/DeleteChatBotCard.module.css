@@ -1,0 +1,44 @@
+.cancel-button,.delete-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: 20px 40px;
+    width: 244px;
+    height: 56px;
+    border-radius: 12px;
+    background: #FD9053;
+    color: #fff;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    text-align: center;
+    font-feature-settings: 'liga' off;
+    transition: all 0.5s;
+    white-space: nowrap;
+    text-decoration: none;
+}
+.delete-button:hover {
+    opacity: 0.5;
+    transition: 0.5s;
+    color: #fff;
+}
+.cancel-button{
+    background: #fff;
+    color: #FD9053;
+    border: 1px solid #FD9053;
+    margin-right: 16px;
+}
+.cancel-button:hover{
+    background: #FD9053;
+    color: #fff;
+}
+@media screen and (max-width: 375px) {
+    .cancel-button,.delete-button{
+        width: 100%;
+        padding: 20px 20px;
+    }
+}
