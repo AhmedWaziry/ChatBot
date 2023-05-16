@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import Style from "./ChatBot2.module.css";
 
 import ChatBotInput2 from "./ChatBotInput2";
-//export const baseURL = "https://api.usual.chat";
+export const baseURL = "https://api.usual.chat";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 import LoopIcon from "@mui/icons-material/Loop";
-export const baseURL = "http://localhost:8000";
+//export const baseURL = "http://localhost:8000";
 
 export default function ChatBot2({ chatMessages, setChatMessages, id }) {
   const bottomRef = useRef(null);

@@ -4,7 +4,8 @@ import ChatBot2 from "./ChatBot2";
 import "./ChatBotPage2.css";
 import SpinnerLoader from "./SpinnerLoader";
 import PrivacyPopup from "./PrivacyPopup";
-export const baseURL = "http://localhost:8000";
+//export const baseURL = "http://localhost:8000";
+export const baseURL = "https://api.usual.chat";
 
 export default function ChatBotPage2({ isClosed, id }) {
   const [chatMessages, setChatMessages] = useState([
