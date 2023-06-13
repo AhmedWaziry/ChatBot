@@ -11,6 +11,86 @@
   
     overflow: hidden;
 }
+.bubble-message-user{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    padding: 10px;
+
+    border-radius: 0px 20px 20px 20px;
+    transition: all 0.5s;
+
+}
+.bubble-message-bot{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    padding: 10px;
+    
+    /*background: rgba(179, 179, 179, 0.1);*/
+    border-radius: 0px 20px 20px 20px;
+    transition: all 0.5s;
+}
+.chat-messages{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 10px;
+    transition: all 0.5s;
+    margin-top: 20px;
+  
+    
+}
+.text-message{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    text-align: start;
+    
+    color: #212121;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+.text-sources{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    box-sizing: border-box;
+    padding: 10px;
+    column-gap: 5px;
+    width: 100%;
+    font-size: 14px;
+    border-top: 0.5px solid rgb(144, 143, 143);
+    
+    
+}
+.sources{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+}
+.learn{
+    font-weight: 600;
+    width: 80px;
+   
+}
+.link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: rgb(233, 245, 255);
+    padding-inline: 15px;
+    border-radius: 5px;
+    color: #0d6efd;
+
+}
 .scrolling{
     overflow: auto;
     margin-bottom: 20px;
@@ -19,29 +99,8 @@
 .scrolling::-webkit-scrollbar {
     display: none;
   }
-.chat-messages{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    padding: 10px;
-    transition: all 0.5s;
-    margin-top: 20px;
-}
-.bubble-message-user{
-    margin-top: 5px;
-    padding: 10px;
-    /*background: rgba(253, 144, 83, 0.15);*/
-    border-radius: 0px 20px 20px 20px;
-    transition: all 0.5s;
 
-}
-.bubble-message-bot{
-    margin-top: 5px;
-    padding: 10px;
-    /*background: rgba(179, 179, 179, 0.1);*/
-    border-radius: 0px 20px 20px 20px;
-    transition: all 0.5s;
-}
+
 .avatar-icon-user{
     display: flex;
     justify-content: center;
@@ -86,20 +145,8 @@
     color: #c3c3c3;
 }
 
-.text-message{
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 28px;
-    display: flex;
-    align-items: center;
-    text-align: start;
 
-    color: #212121;
-    padding-left: 7px;
-    padding-right: 7px;
-}
+
 .loading-img{
   
     display: flex;
