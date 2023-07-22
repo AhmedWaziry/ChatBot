@@ -4,7 +4,6 @@ export default function SpinnerLoader({
   height = "0vh",
   backgroundColor = "white",
 }) {
-  console.log({ height });
   return (
     <div
       className={Style["loading-container"]}

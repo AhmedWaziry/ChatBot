@@ -8,7 +8,7 @@ function AppChat() {
 
   useEffect(() => {
     const scriptTag = document.querySelector(
-      'script[src="https://raw.githubusercontent.com/AhmedWaziry/ChatBot/main/dist/assets/chat_extension_01.js"]'
+      'script[src="https://staging.usual.chat/chat_extension_01.js"]'
     );
 
     if (scriptTag) {

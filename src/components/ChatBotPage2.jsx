@@ -4,8 +4,9 @@ import ChatBot2 from "./ChatBot2";
 import "./ChatBotPage2.css";
 import SpinnerLoader from "./SpinnerLoader";
 import PrivacyPopup from "./PrivacyPopup";
-//export const baseURL = "http://localhost:8000";
-export const baseURL = "https://api.usual.chat";
+export const baseURL = "http://localhost:8000";
+//export const baseURL = "https://api.usual.chat";
+//export const baseURL = "https://staging.api.usual.chat";
 
 export default function ChatBotPage2({ isClosed, id }) {
   const [chatMessages, setChatMessages] = useState([
@@ -23,7 +24,7 @@ export default function ChatBotPage2({ isClosed, id }) {
 
   useEffect(() => {
     const domainName = window.location.hostname;
-    console.log(domainName);
+
     const url = `${baseURL}/chatbot/check_privacy/${id}/${domainName}/`;
     fetch(url, {
       method: "GET",
@@ -32,7 +33,6 @@ export default function ChatBotPage2({ isClosed, id }) {
       },
     })
       .then((res) => {
-        console.log(res.status);
         setLoadingPage(false);
         if (res.status >= 400) {
           if (res.status === 404)

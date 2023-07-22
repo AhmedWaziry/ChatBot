@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Style from "./Extension.module.css";
 import ChatBotPage2 from "./ChatBotPage2";
-//export const baseURL = "http://localhost:8000";
-export const baseURL = "https://api.usual.chat";
+export const baseURL = "http://localhost:8000";
+//export const baseURL = "https://api.usual.chat";
+//export const baseURL = "https://staging.api.usual.chat";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
 export default function Extension({ id }) {

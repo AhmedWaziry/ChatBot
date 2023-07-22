@@ -9,14 +9,14 @@
 }
 .input-text{
     border: none;
-    margin-top: 10px;
+    margin-top: 15px;
     margin-left: 10px;
     width: 95%;
     font-size: 15px;
     font-family: 'Inter';
-    height: auto;
+    min-height: 40px;
     resize: none;
-    padding: 7px;
+    
 }
 .input-text:focus{
     outline: none;

@@ -14,7 +14,7 @@ function ChatBotInput2(props) {
     const lineHeight = parseInt(
       getComputedStyle(textAreaRef.current).getPropertyValue("line-height")
     );
-    console.log(lineHeight);
+
     textAreaRef.current.style.height = lineHeight + 15 + "px";
     textAreaRef.current.style.height = `${Math.max(
       Math.min(textAreaRef.current.scrollHeight, lineHeight * 5 + 15),

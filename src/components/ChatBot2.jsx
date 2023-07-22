@@ -3,46 +3,40 @@ import Style from "./ChatBot2.module.css";
 
 import ChatBotInput2 from "./ChatBotInput2";
 import { hexToRgb, calculateLuma } from "./HelperFunctions.jsx";
-import SmartToyIcon from "@mui/icons-material/SmartToy";
-import LoopIcon from "@mui/icons-material/Loop";
-import LaunchIcon from "@mui/icons-material/Launch";
-//export const baseURL = "http://localhost:8000";
-export const baseURL = "https://api.usual.chat";
+export const baseURL = "http://localhost:8000";
+//export const baseURL = "https://api.usual.chat";
+//export const baseURL = "https://staging.api.usual.chat";
+import Message from "./Message";
 
-function getDomainFromURL(url) {
-  const parsedUrl = new URL(url);
-  return parsedUrl.hostname;
-}
-function getUrlsFromString(sources, answer) {
-  // convert sources list of JSON object string to dic object
-  const sourcesDic = JSON.parse(sources);
-  console.log(sourcesDic);
-  let links = [];
-  for (let i = 0; i < sourcesDic.length; i++) {
-    links.push(
-      <a
-        href={sourcesDic[i].url}
-        target="_blank"
-        className={Style["link"]}
-        key={i}
-      >
-        {getDomainFromURL(sourcesDic[i].url)}
-        <LaunchIcon sx={{ fontSize: "20px", marginLeft: 0.2 }} />
-      </a>
-    );
-  }
-
-  return links;
-}
-
-export default function ChatBot2({ chatMessages, setChatMessages, id }) {
+function ChatBot2({ id }) {
   const bottomRef = useRef(null);
   const [loading, setLoading] = useState(false);
-  const [primary_color, setPrimaryColor] = useState("#fd905326");
+  const [loadingPage, setLoadingPage] = useState(false);
+  const [primary_color, setPrimaryColor] = useState("#6195d126");
   const [secondary_color, setSecondaryColor] = useState("#b3b3b31a");
+  const [logo, setLogo] = useState(null);
+  const [enabled, setEnabled] = useState(true);
+  const [disable, setDisable] = useState(false);
   const [primaryTextColor, setPrimaryTextColor] = useState("black");
   const [secondaryTextColor, setSecondaryTextColor] = useState("black");
-  const [logo, setLogo] = useState(null);
+  const [chatMessagesLength, setChatMessagesLength] = useState(1);
+  const [temp, setTemp] = useState("");
+  // const [isError, setIsError] = useState({ isError: false, errorMessage: "" });
+  let firstTime = 0;
+
+  const [chatMessages, setChatMessages] = useState([
+    {
+      message: "Hi, I'm Usual.chat How can I help you ?",
+      isUser: false,
+      sources: "",
+    },
+  ]);
+
+  const [stream, setStream] = useState({
+    message: "",
+    isUser: false,
+    sources: "",
+  });
 
   const getTextColor = () => {
     // turn hex color to rgb
@@ -53,7 +47,7 @@ export default function ChatBot2({ chatMessages, setChatMessages, id }) {
     const rgb2 = hexToRgb(secondary_color);
     // calculate the perceptive luminance (aka luma) - human eye favors green color...
     const luma2 = calculateLuma(rgb2);
-    if (luma1 > 0.5) {
+    if (luma1 > 0.6) {
       setPrimaryTextColor("black");
     } else {
       setPrimaryTextColor("white");
@@ -69,40 +63,133 @@ export default function ChatBot2({ chatMessages, setChatMessages, id }) {
   }, [primary_color, secondary_color]);
 
   const handleGetAnswer = async (message) => {
-    const url = `${baseURL}/chatbot/chat/${id}/`;
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
+    new ReadableStream({
+      start(controller) {
+        const fetchData = async () => {
+          try {
+            // const response = await fetch("http://localhost:8000/stream");
+            // console.log(response);
+
+            const response = await fetch(`${baseURL}/chatbot/chat/${id}/`, {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json", // Set Content-Type header to indicate JSON format
+                Authorization: localStorage.getItem("access_token")
+                  ? "JWT " + localStorage.getItem("access_token")
+                  : null,
+              },
+              body: JSON.stringify({ question: message }), // Convert body object to JSON string
+            });
+            console.log(response.body);
+            const reader = response.body.getReader();
+            // const response = await apis.getAnswer(message, id);
+            // console.log(response);
+            let start_url = false;
+            let http_check = "";
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) {
+                setStream((prev) => {
+                  return {
+                    ...prev,
+                    message: prev.message + "]",
+                  };
+                });
+                break;
+              }
+              setLoading(false);
+              const text = new TextDecoder().decode(value);
+              for (const char of text) {
+                controller.enqueue(char);
+                console.log(start_url, char);
+                if (char == "[" || char == "(") continue;
+                if (char == "h" && !http_check.startsWith("http")) {
+                  start_url = true;
+                  http_check = "";
+                }
+                if (!start_url && char == "]") continue;
+                if (start_url) {
+                  http_check += char;
+                  if (
+                    http_check.length < 4 &&
+                    http_check[http_check.length - 1] !==
+                      "http"[http_check.length - 1]
+                  ) {
+                    start_url = false;
+                    http_check = "";
+                  }
+                  if (http_check.startsWith("http")) {
+                    if (http_check.length === 4) {
+                      setStream((prev) => {
+                        let current = prev.message.toString();
+                        current = current.slice(-4);
+                        if (current[0] !== " ") {
+                          return {
+                            ...prev,
+                            message:
+                              prev.message.slice(0, -3) +
+                              " " +
+                              prev.message.slice(-3),
+                          };
+                        } else {
+                          return {
+                            ...prev,
+                          };
+                        }
+                      });
+                    }
+                    if (
+                      char == " " ||
+                      char == "\n" ||
+                      char == "\r" ||
+                      char == "]" ||
+                      char == ")" ||
+                      char == ","
+                    ) {
+                      // console.log(http_check, char);
+                      // console.log(stream.message);
+                      start_url = false;
+                      http_check = "";
+                      setStream((prev) => {
+                        return {
+                          ...prev,
+                          message: prev.message + "] ",
+                        };
+                      });
+                      if (char == "]" || char == ")") continue;
+                    }
+                  }
+                  if (
+                    http_check.length == 4 &&
+                    !http_check.startsWith("http")
+                  ) {
+                    start_url = false;
+                    http_check = "";
+                  }
+                }
+                setStream((prev) => {
+                  return {
+                    ...prev,
+                    message: prev.message + char,
+                  };
+                });
+              }
+            }
+          } catch (error) {
+            controller.error(error);
+            setLoading(false);
+          } finally {
+            setLoading(false);
+            setEnabled(true);
+            setDisable(false);
+            controller.close();
+          }
+        };
+
+        fetchData();
       },
-      body: JSON.stringify({
-        question: message,
-      }),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setLoading(false);
-        if (data.result !== undefined) {
-          setChatMessages((prev) => [
-            ...prev.slice(0, prev.length - 1),
-            { message: data.result, isUser: false, sources: data.sources },
-          ]);
-        } else {
-          setChatMessages((prev) => [
-            ...prev.slice(0, prev.length - 1),
-            { message: data, isUser: false, sources: "" },
-          ]);
-        }
-      })
-      .catch((err) => {
-        setLoading(false);
-        setChatMessages((prev) => [
-          ...prev.slice(0, prev.length - 1),
-          { message: "Connection Error", isUser: false },
-        ]);
-      });
+    });
   };
 
   useEffect(() => {
@@ -130,112 +217,91 @@ export default function ChatBot2({ chatMessages, setChatMessages, id }) {
   }, []);
 
   const addMessage = (message, isUser) => {
+    setChatMessagesLength((prev) => prev + 1);
+    if (loading) return;
+    if (stream.message != "") setChatMessages((prev) => [...prev, stream]);
+    setChatMessages((prev) => [
+      ...prev,
+      { message: message, isUser: isUser, sources: "" },
+    ]);
+
+    setStream({ message: "", isUser: false, sources: "" });
     setLoading(true);
-    setChatMessages((prev) => [...prev, { message: message, isUser: isUser }]);
-    setChatMessages((prev) => [...prev, { message: "", isUser: false }]);
+    setDisable(true);
     handleGetAnswer(message);
   };
 
   useEffect(() => {
     // 👇️ scroll to bottom every time messages change
-    bottomRef.current?.scrollIntoView();
-  }, [chatMessages]);
+    const container = bottomRef.current;
+    container.scrollTop = container.scrollHeight;
+  }, [chatMessages, stream]);
 
-  return (
-    <div className={Style["chat"]}>
-      {console.log(chatMessages)}
-      <div className={Style["scrolling"]}>
-        {chatMessages.map((chatMessage, index) => (
-          <div className={Style["chat-messages"]} key={index}>
-            {chatMessage.isUser ? (
-              <div className={Style["avatar-icon-user"]}></div>
-            ) : (
-              <div className={Style["avatar-icon-bot"]}>
-                {logo === null ? (
-                  <SmartToyIcon />
-                ) : (
-                  <img
-                    alt="logo"
-                    src={logo === null ? "" : baseURL + logo}
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                    }}
-                  />
-                )}
-              </div>
-            )}
-            {chatMessage.isUser ? (
-              <div
-                className={Style["bubble-message-user"]}
-                style={{
-                  backgroundColor: primary_color,
-                }}
-              >
-                <span
-                  className={Style["text-message"]}
-                  style={{
-                    color: primaryTextColor,
-                    whiteSpace: "pre-wrap",
-                  }}
-                >
-                  {chatMessage.message}
-                </span>
-              </div>
-            ) : (
-              <div
-                style={{
-                  backgroundColor: secondary_color,
-                }}
-                className={Style["bubble-message-bot"]}
-              >
-                {loading && index == chatMessages.length - 1 && (
-                  <span className={Style["text-message"]}>
-                    <span className={Style["loading-img"]}>
-                      <LoopIcon />
-                    </span>
-                  </span>
-                )}
-                <div className={Style["text-message"]}>
-                  <span
-                    style={{
-                      color: secondaryTextColor,
-                      whiteSpace: "pre-wrap",
-                    }}
-                  >
-                    {chatMessage.message.includes("(Source:")
-                      ? chatMessage.message.replace(/ \(Source: .+?\)/g, "")
-                      : chatMessage.message}
-                  </span>
-                </div>
-
-                {chatMessage.message.includes("(Source:") ||
-                (chatMessage.sources &&
-                  chatMessage.sources !== "" &&
-                  chatMessage.sources.includes("http")) ? (
-                  <div className={Style["text-sources"]}>
-                    <span className={Style["learn"]}>Learn more:</span>
-                    <div className={Style["sources"]}>
-                      {getUrlsFromString(
-                        chatMessage.sources,
-                        chatMessage.message
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <></>
-                )}
-              </div>
-            )}
-          </div>
-        ))}
-        <div ref={bottomRef} />
+  return loadingPage ? (
+    <SpinnerLoader height="73px" />
+  ) : (
+    <>
+      <div className={Style["chat"]}>
+        <div className={Style["scrolling"]} ref={bottomRef}>
+          {chatMessages.map((chatMessage, index) => (
+            <Message
+              chatMessages={chatMessages}
+              chatMessage={chatMessage}
+              index={index}
+              logo={logo}
+              secondaryTextColor={secondaryTextColor}
+              primaryTextColor={primaryTextColor}
+              key={index}
+              primary_color={primary_color}
+              secondary_color={secondary_color}
+            />
+          ))}
+          {loading || stream.message != "" ? (
+            <Message
+              chatMessages={chatMessages}
+              chatMessage={stream}
+              index={chatMessages.length}
+              key={chatMessages.length + 100}
+              logo={logo}
+              secondaryTextColor={secondaryTextColor}
+              primaryTextColor={primaryTextColor}
+              primary_color={primary_color}
+              secondary_color={secondary_color}
+              loading={loading}
+            />
+          ) : (
+            <></>
+          )}
+        </div>
+        <ChatBotInput2
+          addMessage={addMessage}
+          primary_color={primary_color}
+          secondary_color={secondary_color}
+          loading={loading}
+          disable={disable}
+        />
+        <span
+          style={{
+            marginTop: "16px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            fontSize: "12px",
+            color: "#ADADAD",
+          }}
+        >
+          Powered by&nbsp;
+          <span
+            style={{
+              color: "#2F2F7F",
+            }}
+          >
+            Usual.chat
+          </span>
+        </span>
       </div>
-      <ChatBotInput2
-        addMessage={addMessage}
-        primary_color={primary_color}
-        loading={loading}
-      />
-    </div>
+    </>
   );
 }
+
+export default ChatBot2;
