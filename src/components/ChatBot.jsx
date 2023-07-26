@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import Style from "./ChatBot2.module.css";
+import Style from "./ChatBot.module.css";
 
-import ChatBotInput2 from "./ChatBotInput2";
-import { hexToRgb, calculateLuma } from "./HelperFunctions.jsx";
-export const baseURL = "http://localhost:8000";
-//export const baseURL = "https://api.usual.chat";
-//export const baseURL = "https://staging.api.usual.chat";
-import Message from "./Message";
+import ChatBotInput from "./utils/ChatBotInput";
+import { hexToRgb, calculateLuma } from "./utils/HelperFunctions.jsx";
+import BASE_URL from "../config";
+import Message from "./utils/Message";
 
-function ChatBot2({ id }) {
+function ChatBot({ id }) {
   const bottomRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [loadingPage, setLoadingPage] = useState(false);
@@ -70,7 +68,7 @@ function ChatBot2({ id }) {
             // const response = await fetch("http://localhost:8000/stream");
             // console.log(response);
 
-            const response = await fetch(`${baseURL}/chatbot/chat/${id}/`, {
+            const response = await fetch(`${BASE_URL}/chatbot/chat/${id}/`, {
               method: "POST",
               headers: {
                 Accept: "application/json",
@@ -193,7 +191,7 @@ function ChatBot2({ id }) {
   };
 
   useEffect(() => {
-    const url = `${baseURL}/chatbot/${id}/`;
+    const url = `${BASE_URL}/chatbot/${id}/`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -273,7 +271,7 @@ function ChatBot2({ id }) {
             <></>
           )}
         </div>
-        <ChatBotInput2
+        <ChatBotInput
           addMessage={addMessage}
           primary_color={primary_color}
           secondary_color={secondary_color}
@@ -304,4 +302,4 @@ function ChatBot2({ id }) {
   );
 }
 
-export default ChatBot2;
+export default ChatBot;

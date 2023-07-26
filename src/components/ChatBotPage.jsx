@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
-import ChatBotNav2 from "./ChatBotNav2";
-import ChatBot2 from "./ChatBot2";
-import "./ChatBotPage2.css";
-import SpinnerLoader from "./SpinnerLoader";
-import PrivacyPopup from "./PrivacyPopup";
-export const baseURL = "http://localhost:8000";
-//export const baseURL = "https://api.usual.chat";
-//export const baseURL = "https://staging.api.usual.chat";
+import ChatBotNav from "./ChatBotNav";
+import ChatBot from "./ChatBot";
+import Style from "./ChatBotPage.module.css";
+import SpinnerLoader from "./utils/SpinnerLoader";
+import BASE_URL from "../config";
 
-export default function ChatBotPage2({ isClosed, id }) {
+export default function ChatBotPage({ isClosed, id }) {
   const [chatMessages, setChatMessages] = useState([
     { message: "Hi, I'm Usual.chat How can I help you ?", isUser: false },
   ]);
@@ -25,7 +22,7 @@ export default function ChatBotPage2({ isClosed, id }) {
   useEffect(() => {
     const domainName = window.location.hostname;
 
-    const url = `${baseURL}/chatbot/check_privacy/${id}/${domainName}/`;
+    const url = `${BASE_URL}/chatbot/check_privacy/${id}/${domainName}/`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -61,17 +58,17 @@ export default function ChatBotPage2({ isClosed, id }) {
 
   return (
     <div
-      className="chat-page"
+      className={Style["chat-page"]}
       style={{ height: openPrivacy ? "15vh" : "80vh" }}
     >
       {loadingPage ? (
         <SpinnerLoader />
       ) : openPrivacy ? (
-        <div className="failed">{messageDialog}</div>
+        <div className={Style["failed"]}>{messageDialog}</div>
       ) : (
         <>
-          <ChatBotNav2 isClosed={isClosed} onRefrash={onRefrash} />
-          <ChatBot2
+          <ChatBotNav isClosed={isClosed} onRefrash={onRefrash} />
+          <ChatBot
             chatMessages={chatMessages}
             setChatMessages={setChatMessages}
             id={id}

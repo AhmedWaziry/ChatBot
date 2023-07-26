@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Style from "./ChatBotInput2.module.css";
-import Vector1 from "../assets/Vector1.png";
+import Style from "./ChatBotInput.module.css";
+import Vector from "../../assets/Vector1.png";
 
-function ChatBotInput2(props) {
+function ChatBotInput(props) {
   const [message, setMessage] = useState("");
   const textAreaRef = React.useRef(null);
   const handleInputChange = (e) => {
@@ -54,10 +54,10 @@ function ChatBotInput2(props) {
           backgroundColor: props.loading && "gray",
         }}
       >
-        <img src={Vector1} className={Style["submit-icon"]} />
+        <img src={Vector} className={Style["submit-icon"]} />
       </div>
     </div>
   );
 }
 
-export default ChatBotInput2;
+export default ChatBotInput;

@@ -4,7 +4,7 @@ import Extension from "./components/Extension";
 import Style from "./AppChat.module.css";
 
 function AppChat() {
-  const [id, setId] = useState("");
+  const [id, setId] = useState("c55f2119-d081-4b66-aa26-d10a7ca92175");
 
   useEffect(() => {
     const scriptTag = document.querySelector(
