@@ -1,11 +1,15 @@
+.chat-messages {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  transition: all 0.5s;
+  transition: all 0.5s;
+  margin-top: 15px;
+}
 .chat {
   display: flex;
   flex-direction: column;
-  /* padding: 50px; */
-  /* margin-left: 200px; */
-  margin-top: 20px;
   height: 100%;
-  /* max-width: 1000px;    */
   overflow: hidden;
 }
 .scrolling {
@@ -22,13 +26,7 @@
   justify-content: flex-start;
   transition: all 0.5s;
 }
-.chat-messages {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  transition: all 0.5s;
-  transition: all 0.5s;
-}
+
 .bubble-message-user {
   padding: 10px;
   border-radius: 25px;

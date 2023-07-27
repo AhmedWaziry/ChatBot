@@ -3,24 +3,24 @@
     align-items: center;
     justify-content: space-between;
     height: 40px;
+    width: 100%;
+    margin-bottom: 10px;
     background: white;
-    border-radius: 20px;
+ 
+    border-bottom:0.5px solid rgb(229, 229, 229);
 }
 .usaul-chat-txt{
     font-family: 'Playfair Display';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 16px;
     line-height: 16px;
     /* identical to box height, or 46% */
     
     display: flex;
     align-items: center;
-    padding: 24px 16px;
-    margin-left: 36px;
-    color: #212121;
+   
+    color: #2f2f7f;
     
 }
-.icons{
-  margin-right: 20px;
-}
+

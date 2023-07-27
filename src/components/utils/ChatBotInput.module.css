@@ -1,23 +1,35 @@
 .chat-input{
     display: flex;
-    margin-bottom: 20px;
-    border: 2px solid #E5E5E5;
-    border-radius: 10px;
-    justify-content: space-between;
+    position: relative;
+
+    border: 1px solid #6195d1;
+    height: 50px;
+    border-radius: 8px;
+    justify-content: flex-end;
     align-items: center;
     margin-top: auto;
 }
 .input-text{
+    position: absolute;
+    top: 10;
+    left: 10;
     border: none;
-    margin-top: 15px;
-    margin-left: 10px;
-    width: 95%;
-    font-size: 15px;
+    background-color: none;
+    height: 30px;
+    width: 88%;
+    font-size: 12px;
     font-family: 'Inter';
-    min-height: 40px;
+    color: #6195d1;
+   
     resize: none;
     
 }
+.input-text::placeholder{
+    color: #6195d1;
+   
+    
+}
+
 .input-text:focus{
     outline: none;
 }
@@ -30,26 +42,19 @@ form {
 }
 .submit-button{
     display: flex;
-    min-width: 30px;
+    width: 18px;
+    height: 18px;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(91.96deg, rgba(253, 144, 83, 0.9) -16.64%, rgba(253, 144, 83, 0.72) 117.28%);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
-    height: 30px;
+    cursor: pointer;
+    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05); */
+
     margin-right: 10px;
     margin-left: 10px;
     transition: all 0.5s;
 }
-.submit-button:hover{
-    transition: all 0.5s;
-    cursor: pointer;
-    background: linear-gradient(91.96deg, rgba(211, 105, 44, 0.9) -16.64%, rgba(211, 105, 44, 0.9) 117.28%);
-}
 .submit-icon{
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
     
 }

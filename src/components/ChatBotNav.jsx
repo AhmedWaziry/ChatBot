@@ -7,22 +7,7 @@ function ChatBotNav({ isClosed, onRefrash }) {
   return (
     <div className={Style["nav"]}>
       <div className={Style["usaul-chat-txt"]}>
-        <span
-          style={{
-            cursor: "pointer",
-            color: "black",
-          }}
-          onClick={() => {}}
-        >
-          Usual.
-          <span
-            style={{
-              color: "#FD9053",
-            }}
-          >
-            Chat
-          </span>
-        </span>
+        <span>Usual.Chat</span>
       </div>
       <div className={Style["icons"]}>
         <RefreshIcon

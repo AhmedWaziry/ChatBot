@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Style from "./ChatBotInput.module.css";
-import Vector from "../../assets/Vector1.png";
+import Vector from "../../assets/Vector1.svg";
 
 function ChatBotInput(props) {
   const [message, setMessage] = useState("");
@@ -43,17 +43,11 @@ function ChatBotInput(props) {
         onChange={handleInputChange}
         onKeyDown={handleClick}
         name="input"
-        placeholder="Ask me a question"
+        placeholder="Send a message"
         ref={textAreaRef}
         autoFocus
       />
-      <div
-        className={Style["submit-button"]}
-        onClick={handleClick}
-        style={{
-          backgroundColor: props.loading && "gray",
-        }}
-      >
+      <div className={Style["submit-button"]} onClick={handleClick}>
         <img src={Vector} className={Style["submit-icon"]} />
       </div>
     </div>

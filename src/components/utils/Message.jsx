@@ -18,7 +18,6 @@ function Message({
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     const parts = message.split(urlRegex);
     const renderedParts = parts.map((part, index) => {
-      console.log(part);
       if (index % 2 === 1) {
         if (part.endsWith("]") || part.endsWith(")") || part.endsWith(" ")) {
           part = part.slice(0, -1);

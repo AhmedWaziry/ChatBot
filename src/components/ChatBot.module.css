@@ -1,15 +1,9 @@
 .chat{
     display: flex;
     flex-direction: column;
-    /* padding: 50px; */
-    /* margin-left: 200px; */
-    margin:0 30px 10px 30px;
-    
-  
     height: 100%;
-    /* max-width: 1000px;    */
-  
     overflow: hidden;
+   
 }
 .bubble-message-user{
     display: flex;

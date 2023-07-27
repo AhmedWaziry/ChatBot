@@ -6,13 +6,12 @@ import SpinnerLoader from "./utils/SpinnerLoader";
 import BASE_URL from "../config";
 
 export default function ChatBotPage({ isClosed, id }) {
+  const [refrash, setRefrash] = useState(0);
   const [chatMessages, setChatMessages] = useState([
-    { message: "Hi, I'm Usual.chat How can I help you ?", isUser: false },
+    { message: "", isUser: false },
   ]);
   const onRefrash = () => {
-    setChatMessages([
-      { message: "Hi, I'm Usual.chat How can I help you ?", isUser: false },
-    ]);
+    setRefrash((prev) => !prev);
   };
 
   const [openPrivacy, setOpenPrivacy] = useState(false);
@@ -72,6 +71,7 @@ export default function ChatBotPage({ isClosed, id }) {
             chatMessages={chatMessages}
             setChatMessages={setChatMessages}
             id={id}
+            refrash={refrash}
           />
         </>
       )}

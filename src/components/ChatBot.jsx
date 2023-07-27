@@ -5,30 +5,18 @@ import ChatBotInput from "./utils/ChatBotInput";
 import { hexToRgb, calculateLuma } from "./utils/HelperFunctions.jsx";
 import BASE_URL from "../config";
 import Message from "./utils/Message";
+import SpinnerLoader from "./utils/SpinnerLoader";
 
-function ChatBot({ id }) {
+function ChatBot({ id, chatMessages, setChatMessages, refrash }) {
   const bottomRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [loadingPage, setLoadingPage] = useState(false);
   const [primary_color, setPrimaryColor] = useState("#6195d126");
   const [secondary_color, setSecondaryColor] = useState("#b3b3b31a");
   const [logo, setLogo] = useState(null);
-  const [enabled, setEnabled] = useState(true);
   const [disable, setDisable] = useState(false);
   const [primaryTextColor, setPrimaryTextColor] = useState("black");
   const [secondaryTextColor, setSecondaryTextColor] = useState("black");
-  const [chatMessagesLength, setChatMessagesLength] = useState(1);
-  const [temp, setTemp] = useState("");
-  // const [isError, setIsError] = useState({ isError: false, errorMessage: "" });
-  let firstTime = 0;
-
-  const [chatMessages, setChatMessages] = useState([
-    {
-      message: "Hi, I'm Usual.chat How can I help you ?",
-      isUser: false,
-      sources: "",
-    },
-  ]);
 
   const [stream, setStream] = useState({
     message: "",
@@ -65,9 +53,6 @@ function ChatBot({ id }) {
       start(controller) {
         const fetchData = async () => {
           try {
-            // const response = await fetch("http://localhost:8000/stream");
-            // console.log(response);
-
             const response = await fetch(`${BASE_URL}/chatbot/chat/${id}/`, {
               method: "POST",
               headers: {
@@ -79,10 +64,8 @@ function ChatBot({ id }) {
               },
               body: JSON.stringify({ question: message }), // Convert body object to JSON string
             });
-            console.log(response.body);
+
             const reader = response.body.getReader();
-            // const response = await apis.getAnswer(message, id);
-            // console.log(response);
             let start_url = false;
             let http_check = "";
             while (true) {
@@ -100,7 +83,7 @@ function ChatBot({ id }) {
               const text = new TextDecoder().decode(value);
               for (const char of text) {
                 controller.enqueue(char);
-                console.log(start_url, char);
+
                 if (char == "[" || char == "(") continue;
                 if (char == "h" && !http_check.startsWith("http")) {
                   start_url = true;
@@ -145,8 +128,6 @@ function ChatBot({ id }) {
                       char == ")" ||
                       char == ","
                     ) {
-                      // console.log(http_check, char);
-                      // console.log(stream.message);
                       start_url = false;
                       http_check = "";
                       setStream((prev) => {
@@ -179,12 +160,10 @@ function ChatBot({ id }) {
             setLoading(false);
           } finally {
             setLoading(false);
-            setEnabled(true);
             setDisable(false);
             controller.close();
           }
         };
-
         fetchData();
       },
     });
@@ -192,6 +171,12 @@ function ChatBot({ id }) {
 
   useEffect(() => {
     const url = `${BASE_URL}/chatbot/${id}/`;
+    setLoadingPage(true);
+    setStream({
+      message: "",
+      isUser: false,
+      sources: "",
+    });
     fetch(url, {
       method: "GET",
       headers: {
@@ -203,21 +188,23 @@ function ChatBot({ id }) {
         setPrimaryColor(res.primary_color);
         setSecondaryColor(res.secondary_color);
         setLogo(res.logo);
-        setChatMessages((prev) => [
-          ...prev.slice(0, prev.length - 1),
+        setChatMessages([
           {
             message: res.welcome_message,
             isUser: false,
             sources: "",
           },
         ]);
+      })
+      .then(() => {
+        setLoadingPage(false);
       });
-  }, []);
+  }, [refrash]);
 
   const addMessage = (message, isUser) => {
-    setChatMessagesLength((prev) => prev + 1);
     if (loading) return;
     if (stream.message != "") setChatMessages((prev) => [...prev, stream]);
+
     setChatMessages((prev) => [
       ...prev,
       { message: message, isUser: isUser, sources: "" },
@@ -231,73 +218,80 @@ function ChatBot({ id }) {
 
   useEffect(() => {
     // 👇️ scroll to bottom every time messages change
+
     const container = bottomRef.current;
-    container.scrollTop = container.scrollHeight;
+    if (container != null) {
+      container.scrollTop = container.scrollHeight;
+    }
   }, [chatMessages, stream]);
 
-  return loadingPage ? (
-    <SpinnerLoader height="73px" />
-  ) : (
+  return (
     <>
-      <div className={Style["chat"]}>
-        <div className={Style["scrolling"]} ref={bottomRef}>
-          {chatMessages.map((chatMessage, index) => (
-            <Message
-              chatMessages={chatMessages}
-              chatMessage={chatMessage}
-              index={index}
-              logo={logo}
-              secondaryTextColor={secondaryTextColor}
-              primaryTextColor={primaryTextColor}
-              key={index}
-              primary_color={primary_color}
-              secondary_color={secondary_color}
-            />
-          ))}
-          {loading || stream.message != "" ? (
-            <Message
-              chatMessages={chatMessages}
-              chatMessage={stream}
-              index={chatMessages.length}
-              key={chatMessages.length + 100}
-              logo={logo}
-              secondaryTextColor={secondaryTextColor}
-              primaryTextColor={primaryTextColor}
+      {loadingPage ? (
+        <SpinnerLoader />
+      ) : (
+        <>
+          <div className={Style["chat"]}>
+            <div className={Style["scrolling"]} ref={bottomRef}>
+              {chatMessages.map((chatMessage, index) => (
+                <Message
+                  chatMessages={chatMessages}
+                  chatMessage={chatMessage}
+                  index={index}
+                  logo={logo}
+                  secondaryTextColor={secondaryTextColor}
+                  primaryTextColor={primaryTextColor}
+                  key={index}
+                  primary_color={primary_color}
+                  secondary_color={secondary_color}
+                />
+              ))}
+              {loading || stream.message != "" ? (
+                <Message
+                  chatMessages={chatMessages}
+                  chatMessage={stream}
+                  index={chatMessages.length}
+                  key={chatMessages.length + 100}
+                  logo={logo}
+                  secondaryTextColor={secondaryTextColor}
+                  primaryTextColor={primaryTextColor}
+                  primary_color={primary_color}
+                  secondary_color={secondary_color}
+                  loading={loading}
+                />
+              ) : (
+                <></>
+              )}
+            </div>
+            <ChatBotInput
+              addMessage={addMessage}
               primary_color={primary_color}
               secondary_color={secondary_color}
               loading={loading}
+              disable={disable}
             />
-          ) : (
-            <></>
-          )}
-        </div>
-        <ChatBotInput
-          addMessage={addMessage}
-          primary_color={primary_color}
-          secondary_color={secondary_color}
-          loading={loading}
-          disable={disable}
-        />
-        <span
-          style={{
-            marginTop: "16px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            fontSize: "12px",
-            color: "#ADADAD",
-          }}
-        >
-          Powered by&nbsp;
-          <span
-            style={{
-              color: "#2F2F7F",
-            }}
-          >
-            Usual.chat
-          </span>
-        </span>
-      </div>
+            <span
+              style={{
+                marginTop: "16px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "12px",
+                color: "#ADADAD",
+              }}
+            >
+              Powered by&nbsp;
+              <span
+                style={{
+                  color: "#2F2F7F",
+                }}
+              >
+                Usual.chat
+              </span>
+            </span>
+          </div>
+        </>
+      )}
     </>
   );
 }

@@ -9,10 +9,10 @@
   
   .loading-spinner {
     border: 10px solid rgba(0, 0, 0, 0.1);
-    border-top-color: #FD9053;
+    border-top-color: #6195d1;
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     animation: spin 1s ease-in-out infinite;
   }
   
