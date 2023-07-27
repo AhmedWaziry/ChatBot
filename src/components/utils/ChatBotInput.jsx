@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Style from "./ChatBotInput.module.css";
-import Vector from "../../assets/Vector1.svg";
+import SendIcon from "@mui/icons-material/Send";
 
 function ChatBotInput(props) {
   const [message, setMessage] = useState("");
@@ -48,7 +48,7 @@ function ChatBotInput(props) {
         autoFocus
       />
       <div className={Style["submit-button"]} onClick={handleClick}>
-        <img src={Vector} className={Style["submit-icon"]} />
+        <SendIcon sx={{ color: "#6195d1", fontSize: "18px" }} />
       </div>
     </div>
   );

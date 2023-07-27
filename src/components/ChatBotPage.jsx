@@ -21,7 +21,7 @@ export default function ChatBotPage({ isClosed, id }) {
   useEffect(() => {
     const domainName = window.location.hostname;
 
-    const url = `${BASE_URL}/chatbot/check_privacy/${id}/${domainName}/`;
+    const url = `${BASE_URL}/chatbot/check_privacy/${id}/`;
     fetch(url, {
       method: "GET",
       headers: {
